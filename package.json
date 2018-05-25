@@ -1,0 +1,13 @@
+{
+  "name": "graceful-shutdown-example",
+  "version": "1.0.0",
+  "engines": {
+    "node": "8.x"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node src/index.js"
+  }
+}
