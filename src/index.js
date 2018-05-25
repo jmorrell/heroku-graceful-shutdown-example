@@ -4,9 +4,10 @@ const cluster = require('cluster');
 const http = require('http')
 const CONCURRENCY = 4;
 const GRACE = 29000;
+const WORKER_GRACE = 10000;
 
 if (cluster.isMaster) {
-  console.log(`Master ${process.pid} is running`);
+  console.log(`Master is running on pid: ${process.pid}`);
 
   // Fork workers.
   for (let i = 0; i < CONCURRENCY; i++) {
@@ -16,7 +17,7 @@ if (cluster.isMaster) {
   process.on('SIGTERM', () => {
     console.log(`Recieved SIGTERM on pid: ${process.pid}`);
     printCountdown();
-    setTimeout(() => console.log("This should never run"), GRACE);
+    setTimeout(() => console.log(`Exiting the Master process at ${GRACE / 1000} seconds`), GRACE);
   });
 } else {
   const PORT = process.env.PORT || 5000
@@ -34,7 +35,7 @@ if (cluster.isMaster) {
     setTimeout(() => {
       console.log(`Shutting down pid: ${process.pid}`);
       process.exit();
-    }, 28000);
+    }, WORKER_GRACE);
   });
 }
 
