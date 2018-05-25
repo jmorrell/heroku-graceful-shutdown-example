@@ -17,6 +17,7 @@ if (cluster.isMaster) {
 
   process.on('SIGTERM', () => {
     console.log(`Recieved SIGTERM on pid: ${process.pid}`);
+    printCountdown();
     setTimeout(() => console.log("This should never run"), GRACE);
   });
 } else {
@@ -33,4 +34,12 @@ if (cluster.isMaster) {
   process.on('SIGTERM', () => {
     console.log(`Recieved SIGTERM on pid: ${process.pid}`)
   });
+}
+
+function printCountdown() {
+  let i = 30;
+  setInterval(() => {
+    i -= 1;
+    console.log(`timer: ${i}`);
+  }, 1000).unref();
 }
