@@ -3,9 +3,7 @@
 const cluster = require('cluster');
 const http = require('http')
 const CONCURRENCY = 4;
-
-// Keep the service alive longer than Heroku allows
-const GRACE = 31000;
+const GRACE = 29000;
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -36,7 +34,7 @@ if (cluster.isMaster) {
     setTimeout(() => {
       console.log(`Shutting down pid: ${process.pid}`);
       process.exit();
-    }, 29000);
+    }, 28000);
   });
 }
 
