@@ -33,6 +33,10 @@ if (cluster.isMaster) {
 
   process.on('SIGTERM', () => {
     console.log(`Recieved SIGTERM on pid: ${process.pid}`)
+    setTimeout(() => {
+      console.log(`Shutting down pid: ${process.pid}`);
+      process.exit();
+    }, 29000);
   });
 }
 
