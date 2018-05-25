@@ -3,7 +3,7 @@
 const cluster = require('cluster');
 const http = require('http')
 const CONCURRENCY = 4;
-const GRACE = 28000;
+const GRACE = 29000;
 const WORKER_GRACE = 10000;
 
 if (cluster.isMaster) {
@@ -17,7 +17,10 @@ if (cluster.isMaster) {
   process.on('SIGTERM', () => {
     console.log(`Recieved SIGTERM on pid: ${process.pid}`);
     printCountdown();
-    setTimeout(() => console.log(`Exiting the Master process at ${GRACE / 1000} seconds`), GRACE);
+    setTimeout(() => {
+      console.log(`Exiting the Master process at ${GRACE / 1000} seconds`);
+      process.exit();
+    }, GRACE);
   });
 } else {
   const PORT = process.env.PORT || 5000
