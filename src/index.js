@@ -3,7 +3,7 @@
 const cluster = require('cluster');
 const http = require('http')
 const CONCURRENCY = 4;
-const GRACE = 31000;
+const GRACE = 29000;
 const WORKER_GRACE = 10000;
 
 if (cluster.isMaster) {
